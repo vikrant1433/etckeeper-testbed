@@ -1,0 +1,17 @@
+[802-3-ethernet]
+duplex=full
+
+[connection]
+id=static
+uuid=2b342c82-b68c-46d7-82a8-cf52edb9a1c7
+type=802-3-ethernet
+timestamp=1470459737
+
+[ipv6]
+method=auto
+
+[ipv4]
+method=manual
+dns=10.200.1.11;
+address1=10.129.5.155/16,10.129.250.1
+may-fail=false

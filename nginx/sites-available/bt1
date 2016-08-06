@@ -1,0 +1,52 @@
+server {
+    listen 5000;
+    client_max_body_size 4G;
+    keepalive_requests 100000;
+    keepalive_timeout 3000;
+    add_header Accept-Ranges bytes;
+#    log_format timed_combined2 '$remote_addr - $remote_user [$time_local]  '
+#    				'"$request" $status $body_bytes_sent '
+#    				'"$http_referer" "$http_user_agent" '
+#    				'$request_time $upstream_response_time $pipe';
+#    access_log /var/log/elearning_academy_empty/nginx-access.log timed_combined2;
+#    error_log /var/log/elearning_academy_empty/nginx-error.log;
+
+    set $root /home/testbed/prasanth/testing_session_2016/bt1;
+
+    location /static/ {
+        expires 1y;
+        add_header Pragma public;
+        add_header Cache-Control "public";
+        alias   $root/elearning_academy/staticfiles/;
+    }
+
+    location /media/static {
+        alias   $root/elearning_academy/media/static;
+    }
+    location /media/uploads {
+        alias   $root/elearning_academy/media/uploads;
+    }
+    location /media/downloads {
+        alias   $root/elearning_academy/media/downloads;
+    }
+    location /media/images {
+	alias   $root/elearning_academy/media/images;
+    }
+    location /media {
+        alias   $root/elearning_academy/media;
+        internal;
+    }
+    location /favicon.ico {
+        alias    $root/elearning_academy/staticfiles/elearning_academy/img/favicon.ico;
+    }
+
+    location /{
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_connect_timeout 600;
+        proxy_read_timeout 1200;
+        proxy_pass http://127.0.0.1:5010;
+    }
+}
+

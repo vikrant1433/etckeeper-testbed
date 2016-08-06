@@ -1,0 +1,2 @@
+deb ftp://ftp.iitb.ac.in/os/ubuntu/archives/ trusty main restricted universe multiverse 
+deb-src ftp://ftp.iitb.ac.in/os/ubuntu/archives/ trusty main restricted universe multiverse 
